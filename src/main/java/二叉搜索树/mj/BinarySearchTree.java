@@ -1,6 +1,7 @@
 package 二叉搜索树.mj;
 
-import com.mj.printer.BinaryTreeInfo;
+
+import 二叉搜索树.mj.printer.BinaryTreeInfo;
 
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -240,7 +241,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 		visitor.stop = visitor.visit(node.element);
 	}
 
-
 	public void levelOrder(Visitor<E> visitor) {
 		if (root == null || visitor == null) return;
 		
@@ -288,32 +288,32 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 		return true;
 	}
 	
-//	public boolean isComplete() {
-//		if (root == null) return false;
-//		
-//		Queue<Node<E>> queue = new LinkedList<>();
-//		queue.offer(root);
-//		
-//		boolean leaf = false;
-//		while (!queue.isEmpty()) {
-//			Node<E> node = queue.poll();
-//			if (leaf && !node.isLeaf()) return false;
-//
-//			if (node.left != null && node.right != null) {
-//				queue.offer(node.left);
-//				queue.offer(node.right);
-//			} else if (node.left == null && node.right != null) {
-//				return false;
-//			} else { // 后面遍历的节点都必须是叶子节点
-//				leaf = true;
-//				if (node.left != null) {
-//					queue.offer(node.left);
-//				}
-//			}
-//		}
-//		
-//		return true;
-//	}
+	public boolean isComplete1() {
+		if (root == null) return false;
+
+		Queue<Node<E>> queue = new LinkedList<>();
+		queue.offer(root);
+
+		boolean leaf = false;
+		while (!queue.isEmpty()) {
+			Node<E> node = queue.poll();
+			if (leaf && !node.isLeaf()) return false;
+
+			if (node.left != null && node.right != null) {
+				queue.offer(node.left);
+				queue.offer(node.right);
+			} else if (node.left == null && node.right != null) {
+				return false;
+			} else { // 后面遍历的节点都必须是叶子节点
+				leaf = true;
+				if (node.left != null) {
+					queue.offer(node.left);
+				}
+			}
+		}
+
+		return true;
+	}
 	
 	public int height() {
 		if (root == null) return 0;

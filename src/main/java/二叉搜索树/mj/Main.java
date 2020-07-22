@@ -1,9 +1,9 @@
 package 二叉搜索树.mj;
 
-import com.mj.BinarySearchTree.Visitor;
-import com.mj.file.Files;
-import com.mj.printer.BinaryTreeInfo;
-import com.mj.printer.BinaryTrees;
+
+import 二叉搜索树.mj.file.Files;
+import 二叉搜索树.mj.printer.BinaryTreeInfo;
+import 二叉搜索树.mj.printer.BinaryTrees;
 
 import java.util.Comparator;
 
@@ -140,7 +140,7 @@ public class Main {
 	
 	static void test6() {
 		Integer data[] = new Integer[] {
-				7, 4, 9, 2, 5
+				7, 4, 9, 2, 5,1
 		};
 		
 		BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -219,7 +219,7 @@ public class Main {
 		}
 		BinaryTrees.println(bst);
 		
-		bst.preorder(new Visitor<Integer>() {
+		bst.preorder(new BinarySearchTree.Visitor<Integer>() {
 			public boolean visit(Integer element) {
 				System.out.print(element + " ");
 				return element == 2 ? true : false;
@@ -227,7 +227,7 @@ public class Main {
 		});
 		System.out.println();
 		
-		bst.inorder(new Visitor<Integer>() {
+		bst.inorder(new BinarySearchTree.Visitor<Integer>() {
 			public boolean visit(Integer element) {
 				System.out.print(element + " ");
 				return element == 4 ? true : false;
@@ -235,7 +235,7 @@ public class Main {
 		});
 		System.out.println();
 		
-		bst.postorder(new Visitor<Integer>() {
+		bst.postorder(new BinarySearchTree.Visitor<Integer>() {
 			public boolean visit(Integer element) {
 				System.out.print(element + " ");
 				return element == 4 ? true : false;
@@ -243,7 +243,7 @@ public class Main {
 		});
 		System.out.println();
 		
-		bst.levelOrder(new Visitor<Integer>() {
+		bst.levelOrder(new BinarySearchTree.Visitor<Integer>() {
 			public boolean visit(Integer element) {
 				System.out.print(element + " ");
 				return element == 9 ? true : false;
@@ -253,6 +253,6 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		test9();
+		test6();
 	}
 }
