@@ -264,7 +264,62 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
         System.out.println(successor(node));
     }
 
+    public void remove(E element){
+         remove(getNode(element));
+    }
 
+    private void remove(Node node){
+        if(node ==null){
+            return;
+        }
+
+        size--;
+        //删除的节点度为0
+        if(node.isLeaf()){
+            Node parent =  node.parent;
+            if(parent!=null){
+                if(parent.left == node){
+                    parent.left = null;
+                }else{
+                    parent.right = null;
+                }
+            }else{// 是叶子节点 但是无父节点  说明该节点是根节点
+                root = null;
+            }
+
+            return;
+        }
+
+        //删除的节点度为2
+        if(node.hasTwoChildren()){
+            //先找到这个节点的后继节点  这个后继节点肯定在它的右子树种  并且是右子树的最左位置
+            Node postNode = successor(node);
+            //直接把后继节点的值赋值给删除节点 然后删除后继节点即可
+            node.element = postNode.element;
+
+            // 既然是后继节点 那么这个后继节点是肯定没有左节点的 只需要处理右几点即可
+            if(postNode.right ==null){
+                postNode.parent =null;
+            }else{
+                postNode.parent.left = postNode.right;
+            }
+            return;
+        }
+
+        //删除的节点度为1
+
+        Node parent = node.parent;
+        Node child = node.left != null?node.left:node.right;
+        if(parent ==null){
+            root = child;
+        }else{
+            if(parent.left == node){
+                parent.left = child;
+            }else{
+                parent.right = child;
+            }
+        }
+    }
 
 
 

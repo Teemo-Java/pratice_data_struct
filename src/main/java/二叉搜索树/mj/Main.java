@@ -180,7 +180,7 @@ public class Main {
 	
 	static void test7() {
 		Integer data[] = new Integer[] {
-				7, 4, 9, 2, 5, 8, 11, 3, 12, 1
+				7, 4, 10, 2, 5, 8, 11, 3, 12, 1,9
 		};
 		
 		BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -191,6 +191,8 @@ public class Main {
 		BinaryTrees.println(bst);
 		
 		bst.remove(7);
+
+		System.out.println("------------");
 		
 		BinaryTrees.println(bst);
 	}
@@ -253,6 +255,6 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		test6();
+		test7();
 	}
 }

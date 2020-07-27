@@ -91,6 +91,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 			node.element = s.element;
 			// 删除后继节点
 			node = s;
+
 		}
 		
 		// 删除node节点（node的度必然是1或者0）
