@@ -17,10 +17,10 @@ public class Test {
         BinarySearchTree2 bst = new BinarySearchTree2();
 
         Random random = new Random(1);
-        Integer size = 5;
-        Integer max = 20;
+        Integer size = 500;
+        Integer max = 2000;
         Set<Integer> set = new HashSet<>(size);
-        for (int i = 0; i <200000 ; i++) {
+        for (int i = 0; i <2000000 ; i++) {
             int ran1 = random.nextInt(max);
             if(set.size()!=size){
                 set.add(ran1);
@@ -36,12 +36,14 @@ public class Test {
             for (int i = 0; i < list.size(); i++) {
                 bst.addNode(list.get(i));
             }
-            BinaryTrees.println(bst);
+            System.out.println("------------------删除前的树结构--------------------");
+//            BinaryTrees.println(bst);
             for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i));
-//                bst.remove(list.get(i));
+//                System.out.println("-----------------删除节点"+list.get(i)+"后的树结构---------------------");
+                bst.remove(list.get(i));
+//                BinaryTrees.println(bst);
             }
-            System.out.println("111");
+            System.out.println("------删除后的结果------");
             BinaryTrees.println(bst);
         }else{
             System.out.println("测试失败");

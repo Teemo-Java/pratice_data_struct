@@ -19,6 +19,7 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
 
         if(root ==null){//添加的节点是根节点
             root = new Node<>(element,null);
+            size++;
             return;
         }
 
@@ -48,6 +49,7 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
         }else{
             parentNode.left = addNode;
         }
+        size++;
     }
 
 
@@ -278,6 +280,8 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
         if(node.isLeaf()){
             Node parent =  node.parent;
             if(parent!=null){
+                //这里因为删除的节点是叶子节点，所以不用维护其子节点对应父节点信息，但是如果删除的是非叶子节点 ，那么需要维护子节点的父节点信息
+                //当然 手动node.parent = null;也行。这样GC就能快速回收被删除节点的信息了
                 if(parent.left == node){
                     parent.left = null;
                 }else{
@@ -286,7 +290,6 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
             }else{// 是叶子节点 但是无父节点  说明该节点是根节点
                 root = null;
             }
-
             return;
         }
 
@@ -297,11 +300,12 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
             //直接把后继节点的值赋值给删除节点 然后删除后继节点即可
             node.element = postNode.element;
 
-            // 既然是后继节点 那么这个后继节点是肯定没有左节点的 只需要处理右几点即可
+            // 既然是后继节点 那么这个后继节点是肯定没有左节点的 只需要处理右节点即可
             if(postNode.right ==null){
-                postNode.parent =null;
+                postNode.parent.right =null;
             }else{
-                postNode.parent.left = postNode.right;
+                postNode.parent.right = postNode.right;
+                postNode.right.parent = postNode.parent;
             }
             return;
         }
@@ -312,11 +316,14 @@ public class BinarySearchTree2<E extends Comparable>  implements BinaryTreeInfo 
         Node child = node.left != null?node.left:node.right;
         if(parent ==null){
             root = child;
+            child.parent = null;
         }else{
             if(parent.left == node){
                 parent.left = child;
+                child.parent = parent;
             }else{
                 parent.right = child;
+                child.parent = parent;
             }
         }
     }
